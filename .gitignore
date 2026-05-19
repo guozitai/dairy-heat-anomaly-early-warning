@@ -1,0 +1,71 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+.Python
+build/
+dist/
+*.egg
+
+# --- Virtual envs ---
+.venv/
+venv/
+env/
+.env
+
+# --- IDE ---
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- Data (NOT redistributed) ---
+# Raw parlor SQL exports and the 15.79M cow-day pool are subject to data-use
+# agreements with the participating farms; do not commit any of these.
+*.sql
+data/raw/
+data/processed/
+data/interim/
+*.parquet
+predictions/
+derived/
+
+# --- Large outputs (regenerable) ---
+# Bootstrap intermediate files (only final summary CSVs are tracked)
+bootstrap_intermediate/
+*.npy
+*.npz
+
+# --- R ---
+.Rhistory
+.RData
+.Rapp.history
+.Rproj.user/
+
+# --- LightGBM model artifacts ---
+# (Model checkpoints can be regenerated from training scripts; do not commit
+# unless they are small and you want them for replication)
+# *.txt
+# *.pkl
+
+# --- Logs ---
+*.log
+logs/
+
+# --- Temporary ---
+tmp/
+.tmp
+*.bak
+
+# --- Old git history backup (do not commit) ---
+.git_old_v118/
+*.git_old*

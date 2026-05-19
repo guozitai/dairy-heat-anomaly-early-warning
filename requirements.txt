@@ -1,0 +1,44 @@
+## Python dependencies — Heat-stress early warning paper
+##
+## Tested with Python 3.12 on Ubuntu 24.
+## Install:  pip install -r requirements.txt
+
+## Core ML
+lightgbm>=3.3.0,<4.0
+scikit-learn>=1.4.0
+numpy>=1.26.0
+pandas>=2.2.0
+pyarrow>=17.0.0
+
+## Climate data / arrays
+xarray>=2024.1.0
+netCDF4>=1.6.0
+
+## Statistics
+scipy>=1.11.0
+statsmodels>=0.14.0
+
+## I/O and utilities
+tqdm>=4.66.0
+PyYAML>=6.0
+
+## (Optional) For running the rumination analysis
+openpyxl>=3.1.0
+
+## (Optional) Notebooks
+# jupyter>=1.0.0
+
+## ----------------------------------------------------------
+## R dependencies for figure rendering — install in R:
+##
+## install.packages(c(
+##   "ggplot2",       # all figures
+##   "dplyr",         # data wrangling
+##   "tidyr",         # data wrangling
+##   "readr",         # CSV I/O
+##   "scales",        # axis formatting
+##   "patchwork",     # multi-panel layouts
+##   "arrow"          # parquet for figures 4/5
+## ))
+##
+## Tested with R 4.4 on Ubuntu 24.

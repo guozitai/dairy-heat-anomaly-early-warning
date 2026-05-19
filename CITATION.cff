@@ -1,0 +1,69 @@
+cff-version: 1.2.0
+message: "If you use this code or material, please cite the manuscript and this repository."
+type: software
+title: "Deployment-oriented early warning of heat-associated production anomalies in commercial dairy farms"
+abstract: >
+  Source code, figures, and tables accompanying the manuscript:
+  "Deployment-oriented early warning of heat-associated production anomalies
+  across eight commercial dairy farms" (Computers and Electronics in Agriculture, 2026).
+  Implements time-anchored leave-one-site-out validation, cohort-baseline anomaly
+  detection with LightGBM, prospective-feature sensitivity analysis, and
+  rumination-sensor data fusion across 8 commercial dairy farms in Ningxia, China.
+
+authors:
+  - family-names: "Guo"
+    given-names: "Zitai"
+    affiliation: "State Key Laboratory of Animal Nutrition and Feeding, Institute of Animal Sciences, Chinese Academy of Agricultural Sciences"
+    orcid: ""
+  - family-names: "Xu"
+    given-names: "Shiyu"
+    affiliation: "State Key Laboratory of Animal Nutrition and Feeding, Institute of Animal Sciences, Chinese Academy of Agricultural Sciences"
+  - family-names: "Lou"
+    given-names: "Wenqi"
+    affiliation: "State Key Laboratory of Animal Nutrition and Feeding, Institute of Animal Sciences, Chinese Academy of Agricultural Sciences"
+  - family-names: "Hou"
+    given-names: "Li'e"
+    affiliation: "Ningxia Hui Autonomous Region Animal Husbandry Workstation"
+  - family-names: "Guo"
+    given-names: "Hong"
+    affiliation: "Ningxia Hui Autonomous Region Animal Husbandry Workstation"
+  - family-names: "Zhang"
+    given-names: "Yu"
+    affiliation: "Ningxia Hui Autonomous Region Animal Husbandry Workstation"
+  - family-names: "Bu"
+    given-names: "Dengpan"
+    affiliation: "State Key Laboratory of Animal Nutrition and Feeding, Institute of Animal Sciences, Chinese Academy of Agricultural Sciences"
+    email: "Budengpan@126.com"
+
+preferred-citation:
+  type: article
+  title: "Deployment-oriented early warning of heat-associated production anomalies across eight commercial dairy farms"
+  authors:
+    - family-names: "Guo"
+      given-names: "Zitai"
+    - family-names: "Xu"
+      given-names: "Shiyu"
+    - family-names: "Lou"
+      given-names: "Wenqi"
+    - family-names: "Hou"
+      given-names: "Li'e"
+    - family-names: "Guo"
+      given-names: "Hong"
+    - family-names: "Zhang"
+      given-names: "Yu"
+    - family-names: "Bu"
+      given-names: "Dengpan"
+  journal: "Computers and Electronics in Agriculture"
+  year: 2026
+  status: "submitted"
+
+license: MIT
+keywords:
+  - precision livestock farming
+  - heat stress
+  - dairy cattle
+  - machine learning
+  - cross-farm transfer
+  - anomaly detection
+  - LightGBM
+  - time-anchored validation
