@@ -1,14 +1,15 @@
 cff-version: 1.2.0
 message: "If you use this code or material, please cite the manuscript and this repository."
 type: software
-title: "Deployment-oriented early warning of heat-associated production anomalies in commercial dairy farms"
+title: "Session-aware milk-yield monitoring for early warning in dairy herds under heat stress"
 abstract: >
-  Source code, figures, and tables accompanying the manuscript:
-  "Deployment-oriented early warning of heat-associated production anomalies
-  across eight commercial dairy farms" (Computers and Electronics in Agriculture, 2026).
-  Implements time-anchored leave-one-site-out validation, cohort-baseline anomaly
-  detection with LightGBM, prospective-feature sensitivity analysis, and
-  rumination-sensor data fusion across 8 commercial dairy farms in Ningxia, China.
+  Source code accompanying the manuscript "Session-aware milk-yield monitoring for
+  early warning in dairy herds under heat stress: unrecorded milkings, validation
+  against veterinary records and herd-level response to heat". Computes a deviation
+  of daily milk yield from each milking and its interval, tests it against veterinary
+  and management records, estimates the response of herd yield to heat load, and
+  evaluates daily lists of cows at risk on farms and in years not used for fitting.
+  The code of an earlier version of the study (release v1.0) is kept in the repository.
 
 authors:
   - family-names: "Guo"
@@ -37,7 +38,7 @@ authors:
 
 preferred-citation:
   type: article
-  title: "Deployment-oriented early warning of heat-associated production anomalies across eight commercial dairy farms"
+  title: "Session-aware milk-yield monitoring for early warning in dairy herds under heat stress: unrecorded milkings, validation against veterinary records and herd-level response to heat"
   authors:
     - family-names: "Guo"
       given-names: "Zitai"
@@ -53,17 +54,14 @@ preferred-citation:
       given-names: "Yu"
     - family-names: "Bu"
       given-names: "Dengpan"
-  journal: "Computers and Electronics in Agriculture"
   year: 2026
   status: "submitted"
 
 license: MIT
 keywords:
   - precision livestock farming
+  - milking records
+  - data quality
   - heat stress
+  - early warning
   - dairy cattle
-  - machine learning
-  - cross-farm transfer
-  - anomaly detection
-  - LightGBM
-  - time-anchored validation
