@@ -32,7 +32,8 @@ The milking and event records are held under data-use agreements with the partic
 | 2 | `a2_weather.py`, `a2b_elevation.py` | THI from ERA5 and archived forecasts; elevation adjustment | Section 2.5, Table S1 |
 | 3 | `b0_features.py` | Features, risk sets and outcomes of the two tasks | Sections 2.4, 2.8, 2.9, Table S8 |
 | 4 | `b1_audit.py`, `c0_audit_extra.py`, `c0b_missing_pattern.py`, `c10_lowyield.py`, `c11_my24_stats.py`, `b8_misc.py` | Intervals, yield after long gaps, pattern of unrecorded milkings, records removed at cleaning, dispersion of the measures | Section 3.1, Fig. 1, Tables S2a, S2b, S3a |
-| 4 | `d1_farm3_intervals.py`, `d1b_farm3_fourth.py` | Modal interval of each shift by farm and month; the fourth daily session on Farm 3 | Sections 2.2, 3.1 |
+| 4 | `d1_farm3_intervals.py`, `d1b_farm3_fourth.py`, `d4_farm3_fourth_evidence.py` | Modal interval of each shift by farm and month; the fourth daily session on Farm 3 from June 2025 (start times, intervals, yields) | Sections 2.2, 3.1 |
+| 4 | `d5_without_farm3_2025.py`, `d6_without_farm3_local.py` | Main results without the cow-days of Farm 3 from 7 June 2025 | Section 3.1, Table S2c |
 | 4 | `b6_desc.py` | Farms, cow-days, episodes | Table 1 |
 | 4 | `c5_cohort_label.py`, `c5b_cohort_cows.py` | Cohort-referenced label on daily sums | Section 3.2, Table S2b |
 | 5 | `c2_regroup.py`, `c3_flow.py`, `b8_records.py` | Disease classes; flow of disease records | Sections 2.6, 3.3, Tables S4, S5 |
@@ -50,6 +51,6 @@ The milking and event records are held under data-use agreements with the partic
 
 ## Environment
 
-The analyses were run with Python 3.10.12, pandas 2.2.1, NumPy 1.26.4, LightGBM 4.6.0, scikit-learn 1.7.2, SciPy 1.12.0 and pyarrow 24.0.0. `b3w_completeness.py`, `c8_forecast_local.py`, `d3_forecast_ordered.py`, `a2b_elevation.py` and the figure scripts were run with Python 3.11.2, pandas 2.3.3, NumPy 2.4.6 and matplotlib 3.11.1; the figures are converted from SVG with `rsvg-convert`. See `requirements.txt`.
+The analyses were run with Python 3.10.12, pandas 2.2.1, NumPy 1.26.4, LightGBM 4.6.0, scikit-learn 1.7.2, SciPy 1.12.0 and pyarrow 24.0.0. `b3w_completeness.py`, `c8_forecast_local.py`, `d3_forecast_ordered.py`, `d6_without_farm3_local.py`, `a2b_elevation.py` and the figure scripts were run with Python 3.11.2, pandas 2.3.3, NumPy 2.4.6 and matplotlib 3.11.1; the figures are converted from SVG with `rsvg-convert`. See `requirements.txt`.
 
 Random seeds are fixed in the scripts; those of the models, of the sampling of cow-days and of the bootstrap are derived from 20261111.
