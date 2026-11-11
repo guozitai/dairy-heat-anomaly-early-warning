@@ -31,4 +31,14 @@ code=a.assign(c=a.slot.map({"night 00-05":"N","morning 05-12":"M","afternoon 12-
 day=a.groupby("dnum").agg(cows=("cid","nunique")); slots=a.groupby(["dnum","slot"]).cid.nunique().unstack("slot"); cov=slots.div(day.cows,axis=0); P("    share of the cows of a day recorded in each slot: mean over days",cov.mean().round(3).to_dict()); P("    days on which fewer than 20%% of the cows were recorded in the slot: %s of %d days"%((cov<0.2).sum().to_dict(),len(cov)))
 F=pd.read_parquet(V+"feat_v2.parquet",columns=["cid","dnum","DIM","par","my24","elig","farm_id"]); F=F[(F.farm_id==16)&(F.dnum>=D0)&F.elig].join(first4,on="cid"); F["g"]=np.where(F.d4.notna()&(F.dnum>=F.d4),"fourth shift","other")
 P("\n(6) cows concerned against the other cows from June 2025 (eligible cow-days):"); P(F.groupby("g").agg(cowdays=("cid","size"),cows=("cid","nunique"),DIM=("DIM","median"),primiparous=("par",lambda z:(z==1).mean()),my24=("my24","median")).round(2).to_string())
+# ---- table for the supplement: by clock-time slot
+def hhmm(h): return "%02d:%02d"%(int(h),int(round((h-int(h))*60))%60)
+rowsT=[]
+for sl in ["night 00-05","morning 05-12","afternoon 12-19.5","evening 19.5-24"]:
+    g=a[a.slot==sl]; xx=x[x.slot==sl]; q=lambda lo,hi:(g[(g.dt>lo)&(g.dt<=hi)].y.median(),int(((g.dt>lo)&(g.dt<=hi)).sum()))
+    y57=(g[(g.dt>=5)&(g.dt<=7)].y.median(),int(((g.dt>=5)&(g.dt<=7)).sum())); y12=q(11.5,14); y18=q(14,20)
+    rowsT.append(dict(slot=sl,n=len(g),start_median=g.hr.median(),start_hhmm=hhmm(g.hr.median()),four_n=len(xx),four_dt=xx.dt.median(),four_y=xx.y.median(),y_5_7=y57[0],n_5_7=y57[1],y_115_14=y12[0],n_115_14=y12[1],y_14_20=y18[0],n_14_20=y18[1]))
+TT=pd.DataFrame(rowsT); TT.to_csv(V+"tab_farm3_fourth_sessions.csv",index=False); P(TT.round(2).to_string())
+G=F.groupby("g").agg(cowdays=("cid","size"),cows=("cid","nunique"),DIM=("DIM","median")); ns=pd.read_parquet(V+"feat_v2.parquet",columns=["cid","dnum","n_sess","elig","farm_id"]); ns=ns[(ns.farm_id==16)&ns.elig].join(first4,on="cid"); ns=ns[ns.d4.notna()&(ns.dnum>=ns.d4)]
+pd.DataFrame([dict(cows_code4=int(first4.size),cowdays_recorded=len(cd),cowdays_four_sessions=len(f4),elig_cowdays=int(G.loc["fourth shift","cowdays"]),elig_cows=int(G.loc["fourth shift","cows"]),dim_median=float(G.loc["fourth shift","DIM"]),other_cowdays=int(G.loc["other","cowdays"]),other_cows=int(G.loc["other","cows"]),other_dim_median=float(G.loc["other","DIM"]),rec4=float((ns.n_sess==4).mean()),rec3=float((ns.n_sess==3).mean()),rec2=float((ns.n_sess==2).mean()),rec1=float((ns.n_sess==1).mean()),before_y_7_9=float(rb.y.median()),before_n_7_9=len(rb),daily_four=float(cd.loc[f4].ysum.median()))]).to_csv(V+"tab_farm3_fourth_counts.csv",index=False)
 P("DONE")
