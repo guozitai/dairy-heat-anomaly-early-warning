@@ -32,12 +32,15 @@ The milking and event records are held under data-use agreements with the partic
 | 2 | `a2_weather.py`, `a2b_elevation.py` | THI from ERA5 and archived forecasts; elevation adjustment | Section 2.5, Table S1 |
 | 3 | `b0_features.py` | Features, risk sets and outcomes of the two tasks | Sections 2.4, 2.8, 2.9, Table S8 |
 | 4 | `b1_audit.py`, `c0_audit_extra.py`, `c0b_missing_pattern.py`, `c10_lowyield.py`, `c11_my24_stats.py`, `b8_misc.py` | Intervals, yield after long gaps, pattern of unrecorded milkings, records removed at cleaning, dispersion of the measures | Section 3.1, Fig. 1, Tables S2a, S2b, S3a |
+| 4 | `d1_farm3_intervals.py`, `d1b_farm3_fourth.py` | Modal interval of each shift by farm and month; the fourth daily session on Farm 3 | Sections 2.2, 3.1 |
 | 4 | `b6_desc.py` | Farms, cow-days, episodes | Table 1 |
 | 4 | `c5_cohort_label.py`, `c5b_cohort_cows.py` | Cohort-referenced label on daily sums | Section 3.2, Table S2b |
 | 5 | `c2_regroup.py`, `c3_flow.py`, `b8_records.py` | Disease classes; flow of disease records | Sections 2.6, 3.3, Tables S4, S5 |
 | 5 | `c4_validity.py` | Acute drops before veterinary and management records, matched controls | Section 3.3, Table 3, Fig. 2, Table S14 |
+| 5 | `d2_boundary_lowyield.py` | The same comparison without the milkings after intervals of 11.5 to 14 h and with regular-interval milkings only; records of 0.5 kg or less before disease records | Sections 3.1, 3.3 |
 | 6 | `b3_herd.py`, `b3y_herd_final.py`, `b3x_herd_robust.py`, `b3z_checks.py`, `b3w_completeness.py`, `c7_herd_extra.py` | Herd-level response to heat load: classes, slopes, farms, subgroups, sensitivity analyses | Section 3.4, Figs 3a–c, 5a, Tables S6, S7 |
 | 6 | `c8_forecast_local.py` | Archived forecasts against the reanalysis | Section 3.4, Fig. 3d, Table S7d |
+| 6 | `d3_forecast_ordered.py` | Forecasts of 2025 corrected with the bias of 2024 | Section 3.4, Table S7d |
 | 7 | `c1_ew.py <part> <nparts>` | Early-warning evaluation: rules, logistic regression, gradient boosting, leave-one-farm-out in two test years, bootstrap | Sections 3.5, 3.6, Tables 4, 5, S3b, S3c, S9 to S13, S15, S16, Figs 4, 5b |
 | 7 | `c6_merge.py` | Merges the parts of `c1_ew.py` | as above |
 | 7 | `c9_complete_days.py <part> <nparts>` | Task 1 on cow-days with three usable milkings | Section 3.5, Table S12 |
@@ -47,6 +50,6 @@ The milking and event records are held under data-use agreements with the partic
 
 ## Environment
 
-The analyses were run with Python 3.10.12, pandas 2.2.1, NumPy 1.26.4, LightGBM 4.6.0, scikit-learn 1.7.2, SciPy 1.12.0 and pyarrow 24.0.0. `b3w_completeness.py`, `c8_forecast_local.py`, `a2b_elevation.py` and the figure scripts were run with Python 3.11.2, pandas 2.3.3, NumPy 2.4.6 and matplotlib 3.11.1; the figures are converted from SVG with `rsvg-convert`. See `requirements.txt`.
+The analyses were run with Python 3.10.12, pandas 2.2.1, NumPy 1.26.4, LightGBM 4.6.0, scikit-learn 1.7.2, SciPy 1.12.0 and pyarrow 24.0.0. `b3w_completeness.py`, `c8_forecast_local.py`, `d3_forecast_ordered.py`, `a2b_elevation.py` and the figure scripts were run with Python 3.11.2, pandas 2.3.3, NumPy 2.4.6 and matplotlib 3.11.1; the figures are converted from SVG with `rsvg-convert`. See `requirements.txt`.
 
 Random seeds are fixed in the scripts; those of the models, of the sampling of cow-days and of the bootstrap are derived from 20261111.
