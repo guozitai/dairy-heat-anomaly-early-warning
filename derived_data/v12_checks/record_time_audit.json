@@ -1,0 +1,71 @@
+{
+  "event_columns_available": [
+    "id",
+    "farm_id",
+    "cow_number",
+    "cowshed_name",
+    "pro_con",
+    "well_date",
+    "disease_name",
+    "healing_state",
+    "event_time",
+    "work_name",
+    "create_by",
+    "create_time",
+    "update_by",
+    "update_time",
+    "del_flag",
+    "remark",
+    "lact"
+  ],
+  "case_time_fields_absent": [
+    "first_observed_symptom_time",
+    "first_clinical_examination_time",
+    "alert_trigger_source"
+  ],
+  "evaluated_flow_records_2024_2025": 20557,
+  "missing_creation_lag": 0,
+  "negative_entry_lag": 0,
+  "same_calendar_day": 15905,
+  "within_0_to_1_days": 20518,
+  "within_0_to_3_days": 20531,
+  "same_day_fraction": 0.7737023884808094,
+  "within1_fraction": 0.9981028360169285,
+  "event_date_risk_exactly_reproduced": true,
+  "event_date_labels_exactly_reproduced": true,
+  "end_of_day_definition": "Record event date at most t and creation timestamp before midnight ending local calendar day t; excludes disease in event days t-14..t.",
+  "limitation": "Uses current exported rows and their creation timestamps; historical edits/deletions and symptom/diagnosis onset are not reconstructed. Milk-upload latency not available; no clinical lead time claimed.",
+  "creation_time": {
+    "cowdays": 10181806,
+    "cases": 20709,
+    "detected": 9830,
+    "macro_recall": 0.4557515083780159,
+    "pooled_recall": 0.47467284755420347,
+    "mean_entries_per_case": 68.94681761618324,
+    "macro_detection_original_cases": 0.4557515083780159
+  },
+  "event_date": {
+    "cowdays": 10178229,
+    "cases": 20709,
+    "detected": 9839,
+    "macro_recall": 0.45606103998854425,
+    "pooled_recall": 0.4751074412091361,
+    "mean_entries_per_case": 68.87976300631067,
+    "macro_detection_original_cases": 0.45606103998854425
+  },
+  "added_risk_cowdays": 3577,
+  "original_list_retention": 0.9974345265722337,
+  "actual_evaluation_case_timestamps": {
+    "n": 20576,
+    "same_day": 15922,
+    "within1": 20537,
+    "within3": 20550,
+    "negative": 0,
+    "missing": 0
+  },
+  "independent_creation_time_checks": 300,
+  "linked_record_update_after_creation_count": 439,
+  "linked_records_count": 154061,
+  "missing_creation_rows": 0,
+  "missing_creation_cow_event_days": 0
+}

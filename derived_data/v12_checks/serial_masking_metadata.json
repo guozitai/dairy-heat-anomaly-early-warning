@@ -1,0 +1,19 @@
+{
+  "seed": 20261114,
+  "selected_cows": 960,
+  "cows_with_targets": 668,
+  "target_cowdays": 4180,
+  "original_positives": 175,
+  "baseline_max_error": 1.9985217297735502e-07,
+  "brute_reference_checks": 350,
+  "cow_cluster_bootstrap_replicates": 500,
+  "durations": [
+    3,
+    9
+  ],
+  "reference_history_recomputed": true,
+  "intervals_recomputed_from_timestamps": true,
+  "sampling": "Same observed-complete target days as S8; naturally missing records outside/inside reference periods are retained as the starting observation process. Scheduled blocks end 21 days apart.",
+  "mechanisms": "Random record each observed cow-day; one common shift throughout a farm block; lowest observed yield each cow-day (constructed yield-dependent stress).",
+  "interpretation": "Not a real missingness mechanism or biological ground truth. Unavailable scores are reported separately; positive retention over all original positives counts unavailable scores as not recovered."
+}

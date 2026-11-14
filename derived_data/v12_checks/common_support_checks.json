@@ -1,0 +1,6 @@
+{
+  "original_fold_estimates_reproduced": 32,
+  "daily_list_capacity_checked": true,
+  "risk_set_rebuilt_for_common_comparison": true,
+  "note": "D-only detection contributions are descriptive, not an additive causal decomposition of recall differences."
+}

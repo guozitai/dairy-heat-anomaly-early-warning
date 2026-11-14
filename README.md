@@ -11,6 +11,8 @@ The analysis examines incomplete milking records, a cow- and session-specific yi
 - `f1_masking_check.py`: controlled deletion of records on isolated complete-record days, including the numerical 30% yield-reduction test.
 - `session_aware/manuscript/`: archived manuscript and figure-generation scripts.
 
+See `V12_ANALYSIS_README.md` for common-support, creation-time, repeated-deletion and distinct-case pooling checks.
+
 See `SUBMISSION_RELEASE_20261114.md` for execution paths and data requirements. Historical code and documentation remain for provenance.
 
 Commercial farm and cow-level data are not included. Scripts retain their original data paths and require an authorized local copy of the inputs. No trained-model superiority or clinical deployment claim is implied by the model comparisons. The complete-record masking reference is a numerical reference, not a clinical ground truth.

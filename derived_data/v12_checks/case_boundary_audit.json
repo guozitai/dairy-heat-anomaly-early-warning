@@ -1,0 +1,19 @@
+{
+  "case_fold_evaluations": 20709,
+  "unique_cases": 20576,
+  "cases_spanning_test_years": 133,
+  "unique_pooled_rule5": 0.4771578538102644,
+  "unique_pooled_model5": 0.4794420684292379,
+  "all_target_records": 35613,
+  "target_records_with_milking": 23553,
+  "target_unique_evaluable": 20259,
+  "target_rule5_detected": 9671,
+  "target_rule5_coverage": 0.27155813888186897,
+  "target_milked_rule5_coverage": 0.4106058676177132,
+  "risk_days_unique": {
+    "1": 2001,
+    "2": 2902,
+    "3": 15673
+  },
+  "fold_results_unchanged": true
+}
