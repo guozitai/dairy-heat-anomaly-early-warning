@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use this code or material, please cite the manuscript and this repository."
 type: software
-title: "Session-aware milk-yield monitoring for early warning in dairy herds under heat stress"
+title: "Unrecorded milkings and session-aware milk-yield monitoring in dairy herds under heat stress"
 abstract: >
   Source code accompanying the manuscript "Session-aware milk-yield monitoring for
   early warning in dairy herds under heat stress: unrecorded milkings, validation
