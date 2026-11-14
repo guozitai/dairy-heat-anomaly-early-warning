@@ -6,7 +6,7 @@ fig=plt.figure(figsize=(7.48,6.9)); gs=fig.add_gridspec(3,3,height_ratios=[1,1,0
 a=fig.add_subplot(gs[0,:]); g=lambda T,c,col: T[T.config==c].set_index('fold').loc[folds,col].values*100
 a.axhline(g(O,'R_deviation','chance10').mean(),color=DK,lw=0.8)
 r=g(O,'R_deviation','sens10'); m=g(O,'M_ref','sens10'); a.vlines(x,r,m,color=GREY,lw=1.2,zorder=1)
-a.plot(x,g(O,'M_weather+DIM+parity','sens10'),'^',ms=4,mfc='white',mec=BLUE,mew=0.9,label='Boosting: weather, DIM and parity only',zorder=2)
+a.plot(x,g(O,'M_weather+DIM+parity','sens10'),'^',ms=4,mfc='white',mec=BLUE,mew=0.9,label='Boosting: observed weather, DIM and parity',zorder=2)
 a.errorbar(x,r,yerr=[r-g(O,'R_deviation','lo'),g(O,'R_deviation','hi')-r],fmt='o',ms=4.2,mfc='white',mec=DK,ecolor=DK,elinewidth=0.8,capsize=0,label='Deviation rule',zorder=3)
 a.errorbar(x,m,yerr=[m-g(O,'M_ref','lo'),g(O,'M_ref','hi')-m],fmt='o',ms=4.2,color=RED,elinewidth=0.8,capsize=0,label='Boosting: main model',zorder=4)
 a.set_xticks(x); a.set_xticklabels(labs); a.set_ylabel('Onsets on 10% lists (%)'); a.set_ylim(5,None); a.set_xlim(-0.6,len(folds)-0.4); a.legend(loc='lower center',bbox_to_anchor=(0.5,1.0),ncol=3,handletextpad=0.3,columnspacing=1.6,borderaxespad=0.2); panel(a,'a',x=-0.07,y=1.0)

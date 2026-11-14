@@ -41,7 +41,7 @@ def frac(o,st,n,k):
     """list size / risk-set size of the farm-day of each row (probability of being on a random list)"""
     cnt=np.diff(np.r_[st,n]); kk=np.ceil(cnt*k).clip(min=1); p=np.zeros(n); p[o]=np.repeat(kk/cnt,cnt); return p
 def sel_weighted(o,st,w,k):
-    ws=w[o]; cw=np.cumsum(ws)-ws; cnt=np.diff(np.r_[st,len(ws)]); base=np.repeat(cw[st],cnt); tot=np.repeat(np.add.reduceat(ws,st),cnt); s=np.zeros(len(ws),bool); s[o]=(cw-base)<np.maximum(np.ceil(tot*k),1); return s
+    ws=w[o]; cw=np.cumsum(ws)-ws; cnt=np.diff(np.r_[st,len(ws)]); base=np.repeat(cw[st],cnt); tot=np.repeat(np.add.reduceat(ws,st),cnt); q=np.zeros(len(ws),float); q[o]=np.minimum(ws,np.maximum(np.maximum(np.ceil(tot*k),1)-(cw-base),0)); return q
 def fill(v):
     v=np.asarray(v,float); ok=np.isfinite(v); return np.where(ok,v,np.nanmedian(v[ok]) if ok.any() else 0.0)
 def fit(tr,va,feats,ycol,neg,rng,seed=0):
@@ -64,7 +64,7 @@ for (Y,f) in MY:
     # ================= Task 1 =================
     tr=trA[trA.risk_onset]; va=vaA[vaA.risk_onset]; te=teA[teA.D.notna()&(teA.D>=L)].reset_index(drop=True); obs=te.D_next.notna().to_numpy(); y=(te.D_next.to_numpy()<L)&obs
     if obs.sum()>=20000 and y.sum()>=200 and len(tr)>200000:
-        rng=np.random.default_rng([20261111,Y,f,1]); n=len(te); day=te.dnum.to_numpy(); tbk=rng.random(n); cowi=pd.factorize(te.cid)[0]; nc=cowi.max()+1
+        rng=np.random.default_rng([20261111,Y,f,1]); n=len(te); day=te.dnum.to_numpy(); tbk=rng.random(n); _,cowi=np.unique(te.cid.to_numpy(),return_inverse=True); nc=cowi.max()+1
         ys=y&(te.D_next2.to_numpy()<L9); oa=te.DL_next.notna().to_numpy(); ya=(te.DL_next.to_numpy()<L)&oa; ndv=te.n_dev.clip(upper=3).to_numpy(); warm=te.warm.to_numpy()
         fi.update(t1_train=len(tr),t1_train_events=int(tr.y_onset.sum()),t1_test=n,t1_test_observed=int(obs.sum()),t1_onsets=int(y.sum()),t1_confirmed=int(ys.sum()))
         sc={}
@@ -83,9 +83,10 @@ for (Y,f) in MY:
             for k in (1,2,3): r[f"sens10_u{k}"]=S[y&(ndv==k)].mean() if (y&(ndv==k)).sum()>=30 else np.nan; r[f"n_u{k}"]=int((y&(ndv==k)).sum())
             for nmk,mk in (("warm",warm),("cool",~warm)): r["sens10_"+nmk]=S[y&mk].mean() if (y&mk).sum()>=100 else np.nan
             rows1.append(r)
+        rng=np.random.default_rng([20261114,1,f,Y])
         bs=[]
         for _ in range(NB):
-            w=rng.poisson(1.0,nc).astype(float)[cowi]; Sa=sel_weighted(*pre[A],w,0.10); Sb=sel_weighted(*pre[B],w,0.10); wy=w*y; wys=w*ys; bs.append(((wy*Sa).sum()/wy.sum(),(wy*Sb).sum()/wy.sum(),(wys*Sa).sum()/max(wys.sum(),1e-9),(wys*Sb).sum()/max(wys.sum(),1e-9)))
+            w=rng.poisson(1.0,nc).astype(float)[cowi]; Sa=sel_weighted(*pre[A],w,0.10); Sb=sel_weighted(*pre[B],w,0.10); wy=w*y; wys=w*ys; bs.append(((y*Sa).sum()/wy.sum(),(y*Sb).sum()/wy.sum(),(ys*Sa).sum()/max(wys.sum(),1e-9),(ys*Sb).sum()/max(wys.sum(),1e-9)))
         bs=np.array(bs)
         for r in rows1[-len(sc):]:
             if r["config"]==A: r["lo"],r["hi"]=np.percentile(bs[:,0],[2.5,97.5]); r["conf_lo"],r["conf_hi"]=np.percentile(bs[:,2],[2.5,97.5])
@@ -114,7 +115,7 @@ for (Y,f) in MY:
     # ================= Task 2 =================
     tr=trA[trA.risk_dis]; va=vaA[vaA.risk_dis]; te=teA[teA.risk_dis].copy(); te["dimb"]=(te.DIM//30).astype(int); te=te.merge(tb_,on=["pg","dimb"],how="left"); te["cohort_ratio"]=te.y_sum/te.exp_raw; te=te.reset_index(drop=True)
     if te.y_dis.sum()>=30 and len(tr)>200000:
-        rng=np.random.default_rng([20261111,Y,f,2]); y=te.y_dis.to_numpy()==1; n=len(te); day=te.dnum.to_numpy(); tbk=rng.random(n); cowi=pd.factorize(te.cid)[0]; nc=cowi.max()+1; dnd=te.dn_dis.to_numpy()
+        rng=np.random.default_rng([20261111,Y,f,2]); y=te.y_dis.to_numpy()==1; n=len(te); day=te.dnum.to_numpy(); tbk=rng.random(n); _,cowi=np.unique(te.cid.to_numpy(),return_inverse=True); nc=cowi.max()+1; dnd=te.dn_dis.to_numpy()
         pos=np.flatnonzero(y); case=te.cid.to_numpy().astype(np.int64)[pos]*100000+(day[pos]+dnd[pos]).astype(np.int64); cu,ci=np.unique(case,return_inverse=True); ncase=len(cu); case_cow=np.zeros(ncase,int); case_cow[ci]=cowi[pos]
         grp=np.array([GRP.get(int(k),"other") for k in cu],dtype=object); nrd=np.bincount(ci,minlength=ncase); early=dnd[pos]>=2; d1=dnd[pos]==1; has_early=np.bincount(ci,weights=early.astype(float),minlength=ncase)>0; has_d1=np.bincount(ci,weights=d1.astype(float),minlength=ncase)>0
         hot=(te.tmax3.to_numpy()>=77); mild=(te.tmax3.to_numpy()<=72); warm=te.warm.to_numpy(); nd2=te.n_dev.to_numpy()>=2
@@ -162,11 +163,13 @@ for (Y,f) in MY:
         Sa5=sel_fixed(*pre[A],n,0.05); Sb5=sel_fixed(*pre[B],n,0.05); sens.append(dict(analysis="Task 2, records within 1 to 7 days",fold=tag,rate=y7.mean(),rule=cs7(Sa5),model=cs7(Sb5)))
         g2=lambda nm,c: [x for x in rows2[-len(sc):] if x["config"]==nm][0].get(c,np.nan)
         for lab_,c_ in (("Task 2, May to September","case_sens5_warm"),("Task 2, October to April","case_sens5_cool"),("Task 2, days with at least two usable milkings","case_sens5_u2"),("Task 2, lists of days -3 and -2 only","case_sens5_early"),("Task 2, list of day -1 only","case_sens5_d1")): sens.append(dict(analysis=lab_,fold=tag,rate=np.nan,rule=g2(A,c_),model=g2(B,c_)))
+        rng=np.random.default_rng([20261114,2,f,Y])
         bs=[]
         for _ in range(NB):
             wc=rng.poisson(1.0,nc).astype(float); w=wc[cowi]; wcase=wc[case_cow]; out=[]
             for k in (0.05,0.10):
-                for nm in (A,B): out.append(csens(sel_weighted(*pre[nm],w,k),wcase))
+                for nm in (A,B):
+                    copies=sel_weighted(*pre[nm],w,k); detected=np.zeros(ncase); np.maximum.at(detected,ci,copies[pos]); out.append(detected.sum()/max(wcase.sum(),1e-9))
             bs.append(out)
         bs=np.array(bs)
         for r in rows2[-len(sc):]:

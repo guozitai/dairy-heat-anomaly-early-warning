@@ -1,0 +1,3 @@
+Reviewer-driven technical audit, 14 November 2026
+
+Corrected repeated-copy cutoff handling in cow-clustered bootstrap. Point-estimate ranking and fitted models are unchanged. Recomputed 500 replicates for each of 32 task/farm-year combinations from saved predictions. rebootstrap.py uses weighted_bootstrap.c, compiled with cc -O3 -shared -fPIC weighted_bootstrap.c -lm -o weighted_bootstrap.so in the audit directory. 200 literal-expansion tests pass. Original scores reproduce all 64 point estimates exactly. null_ap_check.py verifies 64 raw average-precision values and 32 analytic random-list expectations. Paths require authorized data. This audit adds no private cow-level data to the repository.
